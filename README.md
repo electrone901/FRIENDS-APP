@@ -5,11 +5,9 @@ Implemented AJAX calls from a RESTful JSON API to connect to the React front end
 I wrote both a client and a server based on the RESFUL architectural style. REST-compliant Web services allow requesting systems to access and manipulate textual representations of Web resources using a uniform and predefined set of stateless operations. 
 
 Friends App can make HTTP requests to a specific endpoints and the server can respond to those HTTP requests to specific endpoints based on the request.
-## Live Demo
-https://thawing-sea-97475.herokuapp.com
+## Live Demo: https://thawing-sea-97475.herokuapp.com
 
-## Preview
-![Alt text](/friends.jpg?raw=true "Optional Title")
+## Preview ![Alt text](/friends.jpg?raw=true "Optional Title")
 
 
 
