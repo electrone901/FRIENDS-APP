@@ -6,7 +6,7 @@ I wrote both a client and a server based on the RESFUL architectural style. REST
 
 Friends App can make HTTP requests to a specific endpoints and the server can respond to those HTTP requests to specific endpoints based on the request.
 
-![Alt text](/assets/friends.jpg?raw=true "Optional Title")
+![Alt text](/friends.jpg?raw=true "Optional Title")
 
 
 
