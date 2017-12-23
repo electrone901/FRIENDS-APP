@@ -4,17 +4,23 @@ import {Link} from 'react-router'
 
 const SearchByName = React.createClass({
   getInitialState(){
-    return {searchResult:[]}
+    return {
+      searchResult:[],
+    }
+    this.handleChange = this.handleChange.bind(this)
   },
-  submitSearch: function (e) {
+
+  submitSearch(e) {
+    e.preventDefault();
+    this.refs.form.reset()
     $.ajax({
 		  url: "/api/people/search/" + this.state.searchResult,
 		  method:'GET'
-	})
-	.done((data)=>this.setState({searchResult:data}))
+  	})
+  	.done((data)=>this.setState({searchResult:data}))
   },
 
-	handleChange: function(e) {
+	handleChange(e) {
 	this.setState({searchResult: e.currentTarget.value})
   },
 
@@ -22,14 +28,17 @@ const SearchByName = React.createClass({
     return(
     <div>
       <center>
-        <form>
-          <input style={searchBar} placeholder="Quick Search" onChange={this.handleChange}/><br/>
+        <form onSubmit={this.submitSearch} ref="form">
 
-          <input onClick={this.submitSearch} type="button" value="Search"/>
+          <input style={searchBar} placeholder="Enter Person Name" onChange={this.handleChange} required autoFocus/><br/>
+
+          <button type="submit" className="btn btn-info"> Search <span className="glyphicon glyphicon-send"></span></button>
+
         </form>
 
         <div className='middle'>
-          {this.state.searchResult.map((ele,i)=>{
+          
+          {this.state.searchResult.map((ele, i) => {
           return <table key={i}>
             <tbody>
                 <tr>
@@ -37,13 +46,14 @@ const SearchByName = React.createClass({
                   <td style={tableData}>Name: {ele.name}</td>
                   <td style={tableData}>City: {ele.favoriteCity}</td>
 
-                  <td><Link to={'/update-info/' + ele.id}><button>Update</button></Link></td>
+                  <td><Link to={'/update-info/' + ele.id}><button className="btn btn-success">Update</button></Link></td>
 
-                  <td><Link to={'/delete-user/' + ele.id}><button>Delete</button></Link></td>
+                  <td><Link to={'/delete-user/' + ele.id}><button className="btn btn-danger">Delete</button></Link></td>
                 </tr>
               </tbody> 
           </table>
           })}
+
         </div>
         <div className="searchEmpty-container"></div>
       </center>

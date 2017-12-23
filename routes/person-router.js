@@ -52,7 +52,7 @@ const searchByName = (req,res)=>{
 	Person.findAll({
 	  where: {
 	    name: {
-	      $like: '%' + req.params.name + '%'
+	      $ilike: '%' + req.params.name + '%'
 		}
 	  }
 	})

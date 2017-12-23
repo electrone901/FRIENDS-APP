@@ -8,11 +8,11 @@ const WelcomePage = React.createClass({
 			  <img style={backgroundImg}  src="http://dm3381rcqf07k.cloudfront.net/multisite.insomniac.com/wp-content/uploads/sites/14/2016/04/free-nyc-700x430.jpg" />
 				<center>
 				<header>
-        <div class="container">
-        	<div class="intro-text">
-						<div class="row">
-            	<div class="col-lg-12">
-              	<div class="intro-message">
+        <div className="container-local">
+        	<div className="intro-text-i">
+						<div className="row-i">
+            	<div className="col-lg-12">
+              	<div className="intro-message-local">
                 	<center><h1 style={title}>Welcome To Friends Application it simplifies </h1><br/>
                   <h2 style={title2}> management of your friend lists</h2><br/></center>
                        <Link to="/people"><input style={button1} type="button" value="Explore"/></Link>
@@ -36,19 +36,21 @@ var title = {
   marginTop: "-480px",
   fontWeight: "900",
   fontFamily: "Roboto", 
-  fontSize: "45px",
-  color: "#32ff04",
+  fontSize: "43px",
+  color: "white",
   textTransform: "uppercase",
-  backgroundColor: "rgba(0, 0, 0, 0.22)",
+  backgroundColor: "rgba(2, 3, 4, 0.5)",
+  width:'fit-content',
 }
 var title2 = {
   fontWeight: "900",
   fontFamily: "Roboto", 
-  fontSize: "40px",
+  fontSize: "38px",
   color: "#32ff04",
   textTransform: "uppercase",
   marginTop: "-11px",
-  backgroundColor: "rgb(172, 172, 179)",
+  backgroundColor: "rgba(4, 51, 84, 0.62)",
+  width:'fit-content',
 }
 
 
@@ -60,7 +62,8 @@ var button1 = {
   lineHeight: "1.3333333",
   borderRadius: "6px",
   backgroundColor: "#fff",
-  borderColor: "#ccc"
+  borderColor: "#ccc",
+  color: '#f20789',
 }
 
 var backgroundImg = {

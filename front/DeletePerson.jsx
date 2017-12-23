@@ -20,7 +20,7 @@ componentDidMount: function () {
 
     return (
       <div className="container">
-	      <h1>This User has been Delete!</h1>
+	      <h1>This user has been successfully delete!</h1>
 	      <Link to={'/people'}><button>Return Home</button></Link>
       </div>
     )

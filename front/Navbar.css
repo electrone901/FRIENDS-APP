@@ -13,6 +13,7 @@ html, body {
 @media (min-width: 992px)
 .container {
     width: 970px;
+    float: center;
 }
 @media (min-width: 768px)
 .container {
@@ -29,17 +30,19 @@ html, body {
 }
 
 
+
+
 .a.logoWidth {
   width: 300px;
 }
-.container {
+.container-local {
     margin-right: auto;
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.navbar navbar-default {
+.navbarlocal navbar-default {
   background-color: white;
   border-color: rgb(255, 255, 255);
   font-weight: bolder;
@@ -49,7 +52,7 @@ html, body {
   font-size: 16px;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbarlocal-nav-local>li>a {
 color: #c12c2c;
 }
 
@@ -71,7 +74,9 @@ color: #c12c2c;
   transition: all 250ms ease-out;
 }
 
-
+.intro-message-local {
+  position: relative;
+}
 
 
 /*SEARCH BUTTON*/
@@ -128,13 +133,22 @@ a.dropdown-toggle {
 }
 
 /*adding hover*/
-.navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbarlocal-nav-local > li > a:hover {
     background-color:white;
 }
 
-.navbar-default .navbar-nav > li > a {
+.navbar-default .navbarlocal-nav-local > li > a {
     color: #333;
 }
 
+.snavigation {
+  padding-left: 10px;
+  padding-right: 10px;
+  
+}
 
-*/
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(187, 17, 17, 0.5);
+}
+
+

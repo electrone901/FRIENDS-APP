@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize');
 
 //CREATE DB CONNECTION FOR HEROKU OR LOCAL
-const sequelizeConnection = new Sequelize('postgres://Luis@localhost:5432/spotify');
+const sequelizeConnection = new Sequelize('postgres://ctp_user@localhost:5432/spotify');
 // const sequelizeConnection = new Sequelize(process.env.DATABASE_URL);
 
 
