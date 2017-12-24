@@ -20,9 +20,20 @@ componentDidMount: function () {
 
     return (
       <div className="container">
-	      <h1>This user has been successfully delete!</h1>
-	      <Link to={'/people'}><button>Return Home</button></Link>
-      </div>
+        <div className="alert alert-success" role="alert">
+          <h3>Great news!</h3>
+          <hr/>
+
+          <div className="jumbotron">
+            <h2 className="display-3">This user has been successfully delete!</h2><br/>
+            <hr className="my-4"/>
+
+            <p className="lead">
+              <Link to={'/people'}><button className="btn btn-primary btn-lg">Return Home</button></Link>
+            </p>
+          </div>
+        </div>
+       </div>
     )
   }
 })

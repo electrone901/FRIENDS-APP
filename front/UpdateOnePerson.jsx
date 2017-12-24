@@ -1,10 +1,26 @@
+/******************************************************************************
+Title           : UpdateOnePerson.js
+Author          : Friends App
+Description     : UpdateOnePerson gets id through props  takes the user input, validates the input and if the input doesn't contain errors save it to the database.
+******************************************************************************/
+
+/******************************************************************************
+  Libraries
+******************************************************************************/
 import React from 'react';
-var $ = require('jquery');
 import {Link, browserHistory} from 'react-router';
+var $ = require('jquery');
 
 var UpdateOnePerson = React.createClass({
   getInitialState() {
-    return ({person1: null})
+    return ({
+      person1: null,
+      name:null,
+      favoriteCity:null,
+      personId:null,
+      editing: false,
+      inputText: false,
+    })
   },
 
   componentDidMount: function () {
@@ -12,14 +28,52 @@ var UpdateOnePerson = React.createClass({
       url: "/api/people/"+ this.props.params.personId,
       method: 'GET'
     })
-    .done((data)=>this.setState({person1:data}))
-  },
-  handleChange(inputField, e) {
-    this.setState({[inputField]: e.target.value})
+    .done((data)=> {
+      this.setState({
+        person1:data,
+        personId: data.id,
+        favoriteCity: data.favoriteCity,
+        name: data.name,
+      })
+     }
+    )
   },
 
-  //IF YOU HAVE TIME IMPLEMENT SEE CHANGES SAME PAGE
-  submitUpdate() {
+
+
+  handleChange(inputField, e) {
+    console.log('typing:', e.target.value)
+    this.setState({
+      [inputField]: e.target.value,
+    })
+  },
+
+
+  handleEditing() {
+    this.setState({
+      editing:true,
+      inputText: true,
+    })
+  },
+
+
+  cancelEditing(){
+    this.setState({
+      editing:false,
+      inputText:false,
+    })
+    
+  },
+
+  cancelUpdate() {
+    browserHistory.push('/people');
+  },
+
+
+
+  submitUpdate(e) {
+    console.log('this.state.personId:', this.state.personId)
+
     $.ajax({
       url: '../api/people/' + this.state.person1.id,
       type: 'PUT',
@@ -28,34 +82,101 @@ var UpdateOnePerson = React.createClass({
         favoriteCity: this.state.favoriteCity
       }
     })
-    browserHistory.push('successfuly-updated/'+ this.state.person1.id);
+    browserHistory.push(`/successfuly-updated/${this.state.personId}`)
   },
 
   
+
+
+
+  
   render() {
-    console.log('favoriteCity', this.state.person1 ?  this.state.person1.favoriteCity: 'NO DATA')
+    console.log('stateLuis:', this.state)
+
     return (
       <div className="container">
-        <center>
-  	      <h1>Update Person's Information</h1>
-  	      <form>
-             Edit Name:          <br/>
-            <textarea onChange={this.handleChange.bind(this, 'name')}>
-                {this.props.person1} 
-            </textarea><br/><br/>
 
-              Edit Favorite City:        <br/>
-            <textarea onChange={this.handleChange.bind(this, 'favoriteCity')}type="text" name="favoriteCity">
+        <div className="card-body">
+          <div className="card-header">
 
-                {this.props.person1} 
-            </textarea><br/><br/>
+          { 
+              (this.state.inputText) ? 
+              (
+                <span>
+                  <img onClick={this.cancelEditing} title="Cancel" style={{border: '0px',width: '100px'}}  className="img-responsive pull-right" src='https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/delete.png' />
+                </span>
+              ):
+              (<p></p>) 
+            }
+
+            <span>
+              <img onClick={this.handleEditing} title="Edit this post" style={{border: '0px',width: '100px'}}  className="img-responsive pull-right" src='http://icons.iconarchive.com/icons/osullivanluke/orb-os-x/512/Text-Edit-icon.png' />
+            </span>
+
+            <center>
+          <h3>Update this person's information by clicking the image</h3><br/><br/><br/>
+
+            
+          <form onSubmit={this.submitUpdate} style={{fontFamily:'fantasy'}}>
+
+            {/*  UPDATES NAMES    */}
+            <h4><strong>Name: </strong> {this.state.name}</h4>
+            { 
+              (this.state.inputText) ? 
+              (
+                <input 
+                  onChange={this.handleChange.bind(this, 'name')} 
+                  type="text" 
+                  value={this.state.name} 
+                  style={{backgroundColor:'rgba(5, 244, 222, 0.36)'}}
+                  className="col-md-12" 
+                  required/>
+              ):
+              (null) 
+            }<br/><br/>
 
 
-            <Link to="/people"><input type="button" value="Cancel"/></Link>
+            <h4><strong>City: </strong>{this.state.favoriteCity}</h4>
+            { 
+              (this.state.inputText) ? 
+              (
+                <input 
+                  onChange={this.handleChange.bind(this, 'favoriteCity')} 
+                  type="text" 
+                  value={this.state.favoriteCity} 
+                  style={{backgroundColor:'rgba(5, 244, 222, 0.36)'}} 
+                  className="col-md-12" 
+                  required/>
+              ):
+              (null) 
+            }<br/><br/>
 
-            <input onClick={this.submitUpdate} type="button" value="SAVE" />
+            {/*  SAVE BUTTON    */}
+            { 
+              (this.state.inputText) ? 
+              (
+                <button onClick={this.submitUpdate} type="submit" className="btn btn-success" style={{width:'222px', fontSize:'20px'}}>Save</button>
+              ):
+              (<p></p>) 
+            }
+
+            {/*  CANCEL BUTTON    */}
+            { 
+              (this.state.inputText) ? 
+              (
+                <button onClick={this.cancelUpdate} className="btn btn-warning" style={{width:'222px', fontSize:'20px'}}>Cancel</button>
+              ):
+              (<p></p>) 
+            }
+
+
          </form>
         </center>  
+          </div>
+        </div>
+
+
+        
       </div>
     )
   }
